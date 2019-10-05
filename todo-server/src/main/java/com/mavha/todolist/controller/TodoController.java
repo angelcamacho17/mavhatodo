@@ -1,7 +1,9 @@
 package com.mavha.todolist.controller;
 
+import com.mavha.todolist.model.DBFile;
 import com.mavha.todolist.model.Todo;
 import com.mavha.todolist.payload.ApiResponse;
+import com.mavha.todolist.payload.TodoRequest;
 import com.mavha.todolist.payload.TodoResponse;
 import com.mavha.todolist.service.TodoService;
 import org.slf4j.Logger;
@@ -25,7 +27,8 @@ public class TodoController {
     private TodoService todoService;
 
     @PostMapping("/todos")
-    public ResponseEntity<?> postTodo(@Valid @RequestBody Todo todoRequest){
+    public ResponseEntity<?> postTodo(@Valid @RequestBody TodoRequest todoRequest){
+
         Todo todo = todoService.postTodo(todoRequest);
 
         URI location = ServletUriComponentsBuilder
