@@ -11,7 +11,7 @@ public class TodoService {
     @Autowired
     private TodoRepository todoRepository;
 
-    public TodoResponse postTodo(Todo todo){
-
+    public Todo postTodo(Todo todo){
+        return todoRepository.save(todo);
     }
 }
