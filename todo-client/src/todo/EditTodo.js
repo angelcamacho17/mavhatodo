@@ -115,8 +115,8 @@ class EditTodo extends Component {
        updateTodo(todoData,this.state.id)
          .then(response => {
              notification.success({
-                 message: 'New Todo',
-                 description: "The todo was successfully created",
+                 message: 'Edit Todo',
+                 description: "The todo was successfully updated",
              });
          }).catch(error => {
              notification.error({
@@ -173,7 +173,7 @@ class EditTodo extends Component {
 
                         {!this.state.changeFile?
                         <FormItem className="todo-form-row">
-                            <h5>{this.state.file!=''?'File:' +this.state.file:'No file'}</h5>
+                            <h5>{this.state.file!='' && this.state.file!=null?'File:' +this.state.file:'No file'}</h5>
                          </FormItem>:null}
                         {this.state.changeFile?<FormItem className="todo-form-row">
                           <input type="file" onChange={this.onChange} />

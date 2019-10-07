@@ -4,8 +4,17 @@ import Todo from './Todo';
 import { castVote } from '../util/APIUtils';
 import LoadingIndicator  from '../common/LoadingIndicator';
 import { Button, Icon, notification } from 'antd';
+import { Menu, Dropdown, message } from 'antd';
 import { withRouter } from 'react-router-dom';
 import './TodoList.css';
+
+const menu = (
+  <Menu onClick={this.handleFilter}>
+      <Menu.Item key="1">By id</Menu.Item>
+      <Menu.Item key="2">By description</Menu.Item>
+      <Menu.Item key="3">By status</Menu.Item>
+    </Menu>
+);
 
 class TodoList extends Component {
     constructor(props) {
@@ -21,6 +30,7 @@ class TodoList extends Component {
         };
         this.loadTodoList = this.loadTodoList.bind(this);
         this.handleLoadMore = this.handleLoadMore.bind(this);
+        this.handleFilter = this.handleFilter(this);
     }
 
     loadTodoList(page = 0, size = 30) {
@@ -54,8 +64,12 @@ class TodoList extends Component {
                 isLoading: false
             })
         });
+    }
+
+    handleFilter(){
 
     }
+
 
     componentDidMount() {
         this.loadTodoList();
@@ -92,6 +106,14 @@ class TodoList extends Component {
 
         return (
             <div className="todos-container">
+            <div className="no-todos-found">
+                <Dropdown overlay={menu}>
+                    <a className="ant-dropdown-link" href="#">
+                      Filter<Icon type="down" />
+                    </a>
+                  </Dropdown>
+              </div>
+
                 {todoViews}
                 {
                     !this.state.isLoading && this.state.todos.length === 0 ? (
