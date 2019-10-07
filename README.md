@@ -1,16 +1,16 @@
-Server:
+Server App:
 
-FROM MySQL->
+1. Before run the todo-server application, create database in MySql:
 
   CREATE SCHEMA todo_list;
 
-After run the application todo-server, please run this command in mysql->
+2. After run the application todo-server, please run this command in mysql workbench:
 
   ALTER TABLE todo_list.todos MODIFY file_id varchar(255) null;
 
-Client:
+Client App:
 
-FROM cmd->
+FROM cmd run:
 
   npm i
   npm start
