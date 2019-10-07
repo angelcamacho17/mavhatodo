@@ -86,6 +86,7 @@ class NewTodo extends Component {
                  message: 'New Todo',
                  description: "The todo was successfully created",
              });
+             this.props.history.push("/");
          }).catch(error => {
              notification.error({
                  message: 'Todo App',
@@ -93,7 +94,6 @@ class NewTodo extends Component {
              });
 
          });
-         this.props.history.push("/");
     }
 
 
