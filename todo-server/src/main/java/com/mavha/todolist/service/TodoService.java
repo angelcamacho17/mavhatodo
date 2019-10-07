@@ -31,6 +31,27 @@ public class TodoService {
     @Autowired
     private DBFileRepository fileRepository;
 
+    public PagedResponse<TodoResponse> getTodosBy(String filter){
+
+        // Retrieve todos
+        Pageable pageable = PageRequest.of(0, 30, Sort.Direction.ASC, filter);
+        Page<Todo> todos = todoRepository.findAll(pageable);
+
+        if(todos.getNumberOfElements() == 0) {
+            return new PagedResponse<>(Collections.emptyList(), todos.getNumber(),
+                    todos.getSize(), todos.getTotalElements(), todos.getTotalPages(), todos.isLast());
+        }
+
+        List<Long> todoIds = todos.map(Todo::getId).getContent();
+
+        List<TodoResponse> todosResponses = todos.map(todo -> {
+            return ModelMapper.mapTodoToTodoResponse(todo);
+        }).getContent();
+
+        return new PagedResponse<>(todosResponses, todos.getNumber(),
+                todos.getSize(), todos.getTotalElements(), todos.getTotalPages(), todos.isLast());
+    }
+
     public PagedResponse<TodoResponse> getAll(){
 
         // Retrieve todos

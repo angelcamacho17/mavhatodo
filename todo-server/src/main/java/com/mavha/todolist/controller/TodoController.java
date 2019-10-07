@@ -89,6 +89,11 @@ public class TodoController {
         return todoService.getAll();
     }
 
+    @GetMapping("/todos/by/{filter}")
+    public PagedResponse<TodoResponse> getTodoBy(@PathVariable String filter) {
+        return todoService.getTodosBy(filter);
+    }
+
     @GetMapping("/todos/{todoId}")
     public TodoResponse getTodo(@PathVariable Long todoId){
         Todo todo = todoRepository.findByTodo(todoId);
@@ -99,6 +104,7 @@ public class TodoController {
         todoResponse.setStatus(todo.getStatus());
         if(todo.getFile()!=null) {
             todoResponse.setFile(todo.getFile().getFileName());
+            todoResponse.setFileId(todo.getFile().getId());
         }
         return todoResponse;
     }

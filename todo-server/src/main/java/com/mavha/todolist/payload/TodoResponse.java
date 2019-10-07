@@ -7,6 +7,7 @@ public class TodoResponse {
     private String description;
     private Boolean status;
     private String file;
+    private String fileId;
 
     public Long getId() {
         return id;
@@ -26,6 +27,14 @@ public class TodoResponse {
 
     public Boolean getStatus() {
         return status;
+    }
+
+    public String getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(String fileId) {
+        this.fileId = fileId;
     }
 
     public void setStatus(Boolean status) {

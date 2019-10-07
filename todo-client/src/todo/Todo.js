@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './Todo.css';
+import { API_BASE_URL } from '../constants';
 import { Avatar, Icon, notification} from 'antd';
 import { Link } from 'react-router-dom';
 import { getAvatarColor } from '../util/Colors';
-import { doneTodo, deleteTodo} from '../util/APIUtils';
+import { doneTodo, deleteTodo, downloadFile} from '../util/APIUtils';
 import { Radio, Button } from 'antd';
 const RadioGroup = Radio.Group;
 
@@ -16,8 +17,46 @@ class Todo extends Component {
            done:false
        };
       this.handleDone = this.handleDone.bind(this);
+      this.handleFileDownload = this.handleFileDownload.bind(this);
       this.handleDelete = this.handleDelete.bind(this);
   }
+
+  handleFileDownload() {
+    fetch(API_BASE_URL+'/downloadFile/'+this.props.todo.fileId)
+      .then(response => {
+      console.log(response);
+        /*const filename =  response.headers.get('Content-Disposition').split('filename=')[1];
+        response.blob().then(blob => {
+          let url = window.URL.createObjectURL(blob);
+          let a = document.createElement('a');
+          a.href = url;
+          a.download = filename;
+          a.click();
+      });*/
+   });
+  }
+
+ /* handleFileDownload(){
+    downloadFile(this.props.todo.fileId);
+    let promise = downloadFile(this.props.todo.fileId)
+
+    if(!promise) {
+        return;
+    }
+
+    promise
+    .then(response => {
+        notification.success({
+           message: 'Downloading File',
+           description: "...",
+       });
+    }).catch(error => {
+        notification.error({
+            message: 'Something went worng',
+            description:  error.message || 'Sorry! Something went wrong. Please try again!'
+        });
+    });
+  }*/
 
   handleDone(){
     doneTodo(this.props.todo.id)
@@ -74,7 +113,6 @@ class Todo extends Component {
   }
 
     render() {
-    console.log(this.state.isActive);
       //this.props.history.push("/todos/edit_todo/"+this.props.todo.id)
         return (
             <div className={this.state.isActive?"todo-content":""}>
@@ -102,6 +140,9 @@ class Todo extends Component {
                           <Button type="default" style={{marginRight:'15px'}} >Edit</Button>
                         </Link>
                         <Button type="danger" style={{marginRight:'15px'}} onClick={this.handleDelete}>Delete</Button>
+                        {this.props.todo.file!='no file'?
+                            <Button type="default" style={{marginRight:'15px'}} onClick={this.handleFileDownload} >Download File</Button>
+                        :null}
                     </div>
                 </div>:null}
             </div>

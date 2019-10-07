@@ -12,6 +12,7 @@ public class ModelMapper {
         todoResponse.setDescription(todo.getDescription());
         if (todo.getFile() != null){
             todoResponse.setFile(todo.getFile().getFileName());
+            todoResponse.setFileId(todo.getFile().getId());
         }
         else {
             todoResponse.setFile("no file");

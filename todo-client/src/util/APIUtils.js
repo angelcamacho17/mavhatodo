@@ -48,6 +48,13 @@ export function getAllTodos(page,size) {
     });
 }
 
+export function getTodosBy(filter) {
+    return request({
+        url: API_BASE_URL + "/todos/by/"+filter,
+        method: 'GET'
+    });
+}
+
 export function createTodo(todoData) {
     return request({
         url: API_BASE_URL + "/todos",
@@ -90,5 +97,12 @@ export function uploadFile(files) {
         url: API_BASE_URL + "/uploadFile",
         method: 'POST',
         body:files
+    });
+}
+
+export function downloadFile(fileId) {
+    return request({
+        url: API_BASE_URL + "/downloadFile/"+fileId,
+        method: 'GET'
     });
 }
