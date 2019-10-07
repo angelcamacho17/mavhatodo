@@ -97,7 +97,9 @@ public class TodoController {
         todoResponse.setId(todoId);
         todoResponse.setDescription(todo.getDescription());
         todoResponse.setStatus(todo.getStatus());
-        todoResponse.setFile(todo.getFile().getFileName());
+        if(todo.getFile()!=null) {
+            todoResponse.setFile(todo.getFile().getFileName());
+        }
         return todoResponse;
     }
 }
