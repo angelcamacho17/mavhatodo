@@ -14,6 +14,10 @@ todo-server, Server App (Spring Boot):
 
   ALTER TABLE todo_list.todos MODIFY file_id varchar(255) null;
 
+
+------------------------------------------------------------------------------------------
+
+
 todo-client, Client App (React):
 
 FROM cmd, in the todo-client proyect, run:
