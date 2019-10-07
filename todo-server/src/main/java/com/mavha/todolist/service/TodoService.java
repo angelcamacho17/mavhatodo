@@ -26,6 +26,9 @@ public class TodoService {
     private TodoRepository todoRepository;
 
     @Autowired
+    private DBFileStorageService dBFileStorageService;
+
+    @Autowired
     private DBFileRepository fileRepository;
 
     public PagedResponse<TodoResponse> getAll(){
@@ -65,8 +68,11 @@ public class TodoService {
     }
 
     public Todo updateTodo(TodoRequest todoRequest, Long todoId) {
-
         Todo todo = todoRepository.findByTodo(todoId);
+        if(todoRequest.getFile()!="") {
+            DBFile dbFile = dBFileStorageService.getFile(todoRequest.getFile());
+            todo.setFile(dbFile);
+        }
         todo.setDescription(todoRequest.getDescription());
         todo.setStatus(todoRequest.getStatus());
 

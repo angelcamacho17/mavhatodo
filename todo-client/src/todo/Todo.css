@@ -1,10 +1,11 @@
 .todos-container {
     max-width: 600px;
     margin: 0 auto;
+    margin-top: 20px;
 }
 
 .todo-content {
-    margin: 30px;
+    margin-bottom: 30px;
     padding: 20px 15px 20px 15px;
     letter-spacing: .01em;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.08);
@@ -179,4 +180,9 @@
     color: #657786;
     font-size: 13px;
     margin-top: 2px;
+}
+
+.todo-footer{
+  margin: 20px;
+  padding: 5px;
 }

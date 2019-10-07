@@ -38,7 +38,7 @@ public class FileController {
                 .path(dbFile.getId())
                 .toUriString();
 
-        return new UploadFileResponse(dbFile.getFileName(), fileDownloadUri,
+        return new UploadFileResponse(dbFile.getId(),dbFile.getFileName(), fileDownloadUri,
                 file.getContentType(), file.getSize());
     }
 

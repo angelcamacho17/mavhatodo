@@ -47,7 +47,7 @@ public class TodoController {
 
     }
 
-    @PostMapping("/todos/update/{todoId}")
+    @PutMapping("/todos/update/{todoId}")
     public ResponseEntity<?> updateTodo(@Valid @RequestBody TodoRequest todoRequest,@PathVariable Long todoId){
 
         Todo todo = todoService.updateTodo(todoRequest,todoId);
@@ -90,7 +90,14 @@ public class TodoController {
     }
 
     @GetMapping("/todos/{todoId}")
-    public Todo getTodo(@PathVariable Long todoId){
-        return todoRepository.findByTodo(todoId);
+    public TodoResponse getTodo(@PathVariable Long todoId){
+        Todo todo = todoRepository.findByTodo(todoId);
+
+        TodoResponse todoResponse = new TodoResponse();
+        todoResponse.setId(todoId);
+        todoResponse.setDescription(todo.getDescription());
+        todoResponse.setStatus(todo.getStatus());
+        todoResponse.setFile(todo.getFile().getFileName());
+        return todoResponse;
     }
 }

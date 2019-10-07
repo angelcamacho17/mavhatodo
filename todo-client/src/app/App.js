@@ -6,8 +6,12 @@ import {
   Switch
 } from 'react-router-dom';
 
+import { getCurrentUser } from '../util/APIUtils';
+import { ACCESS_TOKEN } from '../constants';
 
 import TodoList from '../todo/TodoList';
+import NewTodo from '../todo/NewTodo';
+import EditTodo from '../todo/EditTodo';
 import AppHeader from '../common/AppHeader';
 import NotFound from '../common/NotFound';
 import LoadingIndicator from '../common/LoadingIndicator';
@@ -34,20 +38,26 @@ class App extends Component {
       return <LoadingIndicator />
     }
     return (
-      <div>
-      <AppHeader />
         <Layout className="app-container">
+          <AppHeader />
+
           <Content className="app-content">
             <div className="container">
               <Switch>
                 <Route exact path="/"
-                  render={(props) => <TodoList  {...props} />}>
-                </Route><Route component={NotFound}></Route>
+                  render={(props) => <TodoList {...props} />}>
+                </Route>
+                <Route exact path="/new/todo"
+                  render={(props) => <NewTodo {...props} />}>
+                </Route>
+                <Route exact path="/todos/edit_todo/:todoId"
+                  render={(props) => <EditTodo {...props} />}>
+                </Route>
+                <Route component={NotFound}></Route>
               </Switch>
             </div>
           </Content>
         </Layout>
-        </div>
     );
   }
 }
