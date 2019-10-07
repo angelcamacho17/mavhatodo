@@ -22,41 +22,13 @@ class Todo extends Component {
   }
 
   handleFileDownload() {
-    fetch(API_BASE_URL+'/downloadFile/'+this.props.todo.fileId)
-      .then(response => {
-      console.log(response);
-        /*const filename =  response.headers.get('Content-Disposition').split('filename=')[1];
-        response.blob().then(blob => {
-          let url = window.URL.createObjectURL(blob);
-          let a = document.createElement('a');
-          a.href = url;
-          a.download = filename;
-          a.click();
-      });*/
-   });
+        setTimeout(() => {
+        const response = {
+          file: API_BASE_URL+'/downloadFile/'+this.props.todo.fileId,
+        };
+        window.location.href = response.file;
+      }, 100);
   }
-
- /* handleFileDownload(){
-    downloadFile(this.props.todo.fileId);
-    let promise = downloadFile(this.props.todo.fileId)
-
-    if(!promise) {
-        return;
-    }
-
-    promise
-    .then(response => {
-        notification.success({
-           message: 'Downloading File',
-           description: "...",
-       });
-    }).catch(error => {
-        notification.error({
-            message: 'Something went worng',
-            description:  error.message || 'Sorry! Something went wrong. Please try again!'
-        });
-    });
-  }*/
 
   handleDone(){
     doneTodo(this.props.todo.id)
