@@ -4,17 +4,6 @@
     margin-top: 40px;
 }
 
-.create-todo-form, .modal{
-  position: relative;
-  background-image: linear-gradient(
-    to right,
-    #000000,
-    #434343
-  );
-  box-shadow: -5px 27px 12px -32px rgba(255,255,255,1);
-  z-index: 1;
-}
-
 .create-todo-form-button {
     width: 100%;
 }
@@ -56,10 +45,4 @@
 
 .todo-form-row input, .todo-form-row textarea {
     margin-bottom: 4px;
-}
-.create-game-button {
-    width: 50%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }

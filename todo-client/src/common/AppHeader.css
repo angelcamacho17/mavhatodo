@@ -7,7 +7,6 @@
     line-height: 64px;
     font-size: 21px;
     display: inline-block;
-    color:#e500fa;
   }
 
   .app-title a:hover {
@@ -17,20 +16,15 @@
   .app-header {
     position: fixed;
     width: 100%;
-    box-shadow: 0 1px 5px #fff;
+    box-shadow: 0 2px 8px #f0f1f2;
+    background-color: #eee6f5;
+    margin-top: -64px;
     z-index: 10;
     padding: 0;
-    background:#1c1b1c;
   }
-
- .app-sidebar{
-  position: fixed;
-  padding: 0;
-}
 
   .app-menu {
     float: right;
-    background:#1c1b1c;
   }
 
   .app-menu > li {
@@ -91,16 +85,4 @@
     padding: 0 15px;
     margin: 0 -15px;
   }
-}
-
-span{
-  color:#fff;
-}
-
-h1{
-    margin-top:25px;
-}
-
-p{
-    color:#fff;
 }

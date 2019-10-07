@@ -1,5 +1,7 @@
 package com.mavha.todolist.model;
 
+import org.springframework.lang.Nullable;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -18,7 +20,8 @@ public class Todo {
     private Boolean status;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "file_id", nullable = false)
+    @JoinColumn(name = "file_id")
+    @Nullable
     private DBFile file;
 
     public DBFile getFile() {

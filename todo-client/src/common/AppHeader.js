@@ -12,8 +12,14 @@ class AppHeader extends Component {
         super(props);
         this.handleMenuClick = this.handleMenuClick.bind(this);
     }
-    render() {
 
+    handleMenuClick({ key }) {
+      if(key === "logout") {
+        this.props.onLogout();
+      }
+    }
+
+    render() {
         return (
             <Header className="app-header">
             <div className="container">
@@ -23,18 +29,8 @@ class AppHeader extends Component {
               <Menu
                 className="app-menu"
                 mode="horizontal"
-                selectedKeys={1}
+                selectedKeys={[this.props.location.pathname]}
                 style={{ lineHeight: '64px' }} >
-                <Menu.Item key="/">
-                  <Link to="/">
-                    <Icon type="home" className="nav-icon" />
-                  </Link>
-                </Menu.Item>,
-                <Menu.Item key="/poll/new">
-                <Link to="/poll/new">
-                  New todo
-                </Link>
-              </Menu.Item>
               </Menu>
             </div>
           </Header>

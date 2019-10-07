@@ -6,11 +6,12 @@ import {
   Switch
 } from 'react-router-dom';
 
+
 import TodoList from '../todo/TodoList';
-import NewTodo from '../todo/NewTodo';
 import AppHeader from '../common/AppHeader';
 import NotFound from '../common/NotFound';
 import LoadingIndicator from '../common/LoadingIndicator';
+import PrivateRoute from '../common/PrivateRoute';
 
 import { Layout, notification } from 'antd';
 const { Content } = Layout;
@@ -19,7 +20,6 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      addTodo: false,
     }
 
     notification.config({
@@ -27,20 +27,6 @@ class App extends Component {
       top: 70,
       duration: 3,
     });
-    this.handleAddTodo = this.handleAddTodo.bind(this);
-    this.handleCloseTodo = this.handleCloseTodo.bind(this);
-  }
-
-  handleAddTodo(){
-      this.setState({
-          addTodo: true
-      });
-  }
-
-  handleCloseTodo(){
-      this.setState({
-          addTodo: false
-      });
   }
 
   render() {
@@ -48,23 +34,20 @@ class App extends Component {
       return <LoadingIndicator />
     }
     return (
+      <div>
+      <AppHeader />
         <Layout className="app-container">
-          <AppHeader isAuthenticated={this.state.isAuthenticated}
-            currentUser={this.state.currentUser}
-            onLogout={this.handleLogout} />
-
           <Content className="app-content">
             <div className="container">
               <Switch>
                 <Route exact path="/"
-                  render={(props) => <TodoList isAuthenticated={this.state.isAuthenticated}
-                      currentUser={this.state.currentUser}  {...props} />}>
-                </Route>
-                <Route component={NotFound}></Route>
+                  render={(props) => <TodoList  {...props} />}>
+                </Route><Route component={NotFound}></Route>
               </Switch>
             </div>
           </Content>
         </Layout>
+        </div>
     );
   }
 }

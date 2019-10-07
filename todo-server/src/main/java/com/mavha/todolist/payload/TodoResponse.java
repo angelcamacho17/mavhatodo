@@ -6,7 +6,7 @@ public class TodoResponse {
     private Long id;
     private String description;
     private Boolean status;
-    private DBFile file;
+    private String file;
 
     public Long getId() {
         return id;
@@ -32,11 +32,11 @@ public class TodoResponse {
         this.status = status;
     }
 
-    public DBFile getFile() {
+    public String getFile() {
         return file;
     }
 
-    public void setFile(DBFile file) {
+    public void setFile(String file) {
         this.file = file;
     }
 }

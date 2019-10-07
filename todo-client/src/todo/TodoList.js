@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { getAllTodos} from '../util/APIUtils';
 import Todo from './Todo';
+import NewTodo from './NewTodo';
+import { castVote } from '../util/APIUtils';
 import LoadingIndicator  from '../common/LoadingIndicator';
 import { Button, Icon, notification } from 'antd';
 import { withRouter } from 'react-router-dom';
@@ -15,17 +18,18 @@ class TodoList extends Component {
             totalElements: 0,
             totalPages: 0,
             last: true,
-            isLoading: false
+            isLoading: false,
+            newTodo:false
         };
         this.loadTodoList = this.loadTodoList.bind(this);
         this.handleLoadMore = this.handleLoadMore.bind(this);
+        this.handleNewTodo = this.handleNewTodo.bind(this);
+        this.handleCloseTodo = this.handleCloseTodo.bind(this);
     }
 
     loadTodoList(page = 0, size = 30) {
-        /*let promise;
-        if(this.props.username) {
-            promise = getAlltodos(page, size);
-        }
+        let promise;
+        promise = getAllTodos(page, size);
 
         if(!promise) {
             return;
@@ -52,7 +56,7 @@ class TodoList extends Component {
             this.setState({
                 isLoading: false
             })
-        });*/
+        });
 
     }
 
@@ -76,6 +80,18 @@ class TodoList extends Component {
         }
     }
 
+    handleNewTodo(){
+      this.setState({
+        newTodo:true
+      });
+    }
+
+    handleCloseTodo(){
+      this.setState({
+        newTodo:false
+      });
+    }
+
     handleLoadMore() {
         this.loadTodoList(this.state.page + 1);
     }
@@ -85,12 +101,15 @@ class TodoList extends Component {
         this.state.todos.forEach((todo, todoIndex) => {
             todoViews.push(<Todo
                 key={todo.id}
-                todo={todo}
-                currentVote={this.state.currentVotes[todoIndex]}/>)
+                todo={todo} />)
         });
 
         return (
             <div className="todos-container">
+                <Button style = {{ marginTop: '16px' }} type="" value="large" onClick={this.handleNewTodo}>
+                    <Icon type="plus" /> New Todo
+                </Button>
+                {this.state.newTodo?<NewTodo unmountMe={this.handleCloseTodo}></NewTodo>:null}
                 {todoViews}
                 {
                     !this.state.isLoading && this.state.todos.length === 0 ? (
