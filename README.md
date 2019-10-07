@@ -1,14 +1,19 @@
-Server App:
+todo-server, Server App (Spring Boot):
 
-1. Before run the todo-server application, create database in MySql:
+1. In the file application.properties, setup your database user and password.
+
+  spring.datasource.username= yourUsername
+  spring.datasource.password= yourPassword
+
+2. Before run the todo-server application, create database in MySql:
 
   CREATE SCHEMA todo_list;
 
-2. After run the application todo-server, please run this command in mysql workbench:
+3. After run the application todo-server, please run this command in mysql workbench:
 
   ALTER TABLE todo_list.todos MODIFY file_id varchar(255) null;
 
-Client App:
+todo-client, Client App (React):
 
 FROM cmd run:
 
