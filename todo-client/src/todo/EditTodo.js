@@ -118,6 +118,7 @@ class EditTodo extends Component {
                  message: 'Edit Todo',
                  description: "The todo was successfully updated",
              });
+             this.props.history.push("/");
          }).catch(error => {
              notification.error({
                  message: 'Todo App',
@@ -125,7 +126,6 @@ class EditTodo extends Component {
              });
 
          });
-         this.props.history.push("/");
     }
 
     isFormInvalid() {
