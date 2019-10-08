@@ -140,7 +140,8 @@ class EditTodo extends Component {
         this.setState({
           id:this.props.match.params.todoId,
           description:{
-            text:response.description
+            text:response.description,
+            validateStatus:'success'
           },
           file:response.file,
           status:response.status
@@ -202,6 +203,7 @@ class EditTodo extends Component {
                             <Button type="primary"
                                 htmlType="submit"
                                 size="large"
+                                disabled={this.isFormInvalid()}
                                 className="create-todo-form-button">Update todo</Button>
                         </FormItem>
                     </Form>
